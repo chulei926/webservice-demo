@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="service.demo.server.ws.leichu.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="UserServiceImplService" targetNamespace="service.demo.server.ws.leichu.com">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="service.demo.server.ws.leichu.com" elementFormDefault="unqualified" targetNamespace="service.demo.server.ws.leichu.com" version="1.0">
+
+  <xs:element name="getUserById" type="tns:getUserById"/>
+
+  <xs:element name="getUserByIdResponse" type="tns:getUserByIdResponse"/>
+
+  <xs:element name="getUsers" type="tns:getUsers"/>
+
+  <xs:element name="getUsersResponse" type="tns:getUsersResponse"/>
+
+  <xs:element name="saveUser" type="tns:saveUser"/>
+
+  <xs:element name="saveUserResponse" type="tns:saveUserResponse"/>
+
+  <xs:complexType name="getUserById">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="userId" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getUserByIdResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:user"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="user">
+    <xs:sequence>
+      <xs:element name="age" type="xs:int"/>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="saveUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:user"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="saveUserResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getUsers">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getUsersResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:user"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getUserById">
+    <wsdl:part element="tns:getUserById" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getUsers">
+    <wsdl:part element="tns:getUsers" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getUserByIdResponse">
+    <wsdl:part element="tns:getUserByIdResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveUserResponse">
+    <wsdl:part element="tns:saveUserResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveUser">
+    <wsdl:part element="tns:saveUser" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getUsersResponse">
+    <wsdl:part element="tns:getUsersResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="UserService">
+    <wsdl:operation name="getUserById">
+      <wsdl:input message="tns:getUserById" name="getUserById">
+    </wsdl:input>
+      <wsdl:output message="tns:getUserByIdResponse" name="getUserByIdResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveUser">
+      <wsdl:input message="tns:saveUser" name="saveUser">
+    </wsdl:input>
+      <wsdl:output message="tns:saveUserResponse" name="saveUserResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUsers">
+      <wsdl:input message="tns:getUsers" name="getUsers">
+    </wsdl:input>
+      <wsdl:output message="tns:getUsersResponse" name="getUsersResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UserServiceImplServiceSoapBinding" type="tns:UserService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getUserById">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getUserById">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUserByIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveUser">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="saveUser">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="saveUserResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUsers">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getUsers">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUsersResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UserServiceImplService">
+    <wsdl:port binding="tns:UserServiceImplServiceSoapBinding" name="UserServicePort">
+      <soap:address location="http://localhost:8080/services/UserService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
