@@ -52,7 +52,7 @@ class WsClientDemoApplicationTests {
 	@Test
 	void staticInvokeTest() {
 		GetUserById getUserById = new GetUserById();
-		getUserById.setUserId(1L);
+		getUserById.setUserId(4L);
 		Object o = soapConnector.callWebService(wsUrl, getUserById);
 		JAXBElement<GetUserByIdResponse> response = (JAXBElement<GetUserByIdResponse>) o;
 		GetUserByIdResponse value = response.getValue();
