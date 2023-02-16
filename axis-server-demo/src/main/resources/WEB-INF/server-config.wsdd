@@ -1,0 +1,44 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient server-config.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server server-config.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+		xmlns="http://xml.apache.org/axis/wsdd/"
+		xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+	<!-- Services from SCServiceService WSDL service -->
+
+	<service name="SCService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="wsdlTargetNamespace" value="http://SCService.xxx.com"/>
+		<parameter name="wsdlServiceElement" value="SCServiceService"/>
+		<parameter name="wsdlServicePort" value="SCService"/>
+		<parameter name="className" value="com.example.axis.server.demo.ws.SCServiceSoapBindingImpl"/>
+		<parameter name="wsdlPortType" value="SCService"/>
+		<parameter name="typeMappingVersion" value="1.2"/>
+        <operation name="invoke" qname="operNS:invoke" returnQName="invokeReturn" returnType="rtns:string" soapAction="">
+			<parameter qname="xmlData" type="tns:string" xmlns:tns="http://schemas.xmlsoap.org/soap/encoding/"/>
+		</operation>
+		<parameter name="allowedMethods" value="invoke"/>
+
+	</service>
+
+	<transport name="http">
+		<parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler" />
+		<parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler" />
+		<parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler" />
+		<requestFlow>
+			<handler type="java:org.apache.axis.handlers.http.URLMapper" />
+			<handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler" />
+		</requestFlow>
+	</transport>
+	<transport name="local">
+		<responseFlow>
+			<handler type="LocalResponder" />
+		</responseFlow>
+	</transport>
+
+</deployment>
